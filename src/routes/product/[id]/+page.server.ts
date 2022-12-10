@@ -11,6 +11,8 @@ export const load: PageServerLoad = async ({ params }) => {
 	}
 
 	return {
-		product
+		product,
+		title: product.title,
+		description: product.description
 	};
 };
