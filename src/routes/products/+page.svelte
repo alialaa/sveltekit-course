@@ -6,7 +6,7 @@
 	$: products = data.products.products;
 </script>
 
-<h2>Products</h2>
+<h2>{data.title}</h2>
 
 {#if products && products.length > 0}
 	<ul>
