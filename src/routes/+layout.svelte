@@ -21,6 +21,19 @@
 <nav>
 	<a href="/">Home</a>
 	<a href="/products">Products</a>
+	{#if !data.user}
+		<a href="/login">Login</a>
+	{/if}
 </nav>
+
+{#if data.user}
+	<button
+		on:click={() => {
+			fetch('/api/logout', { method: 'POST' });
+		}}
+	>
+		Logout
+	</button>
+{/if}
 
 <slot />
