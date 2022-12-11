@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
+	import { goto, invalidateAll } from '$app/navigation';
 
 	let username = '';
 	let password = '';
@@ -11,7 +11,10 @@
 		});
 		const resJSON = await response.json();
 		if (response.ok) {
-			goto('/');
+			// goto('/', {
+			// 	invalidateAll: true
+			// });
+			invalidateAll();
 		} else {
 			alert(resJSON.message);
 		}
