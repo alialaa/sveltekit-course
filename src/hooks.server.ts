@@ -2,9 +2,9 @@ import type { Handle, HandleFetch } from '@sveltejs/kit';
 import { sequence } from '@sveltejs/kit/hooks';
 
 export const handle1: Handle = async ({ event, resolve }) => {
-	const { locals, cookies, isDataRequest, url } = event;
+	const { locals, cookies, url } = event;
 
-	if (!isDataRequest && !url.pathname.startsWith('/api')) {
+	if (!url.pathname.startsWith('/api')) {
 		const token = cookies.get('token');
 
 		locals.user = token ? { name: 'John', id: 1 } : undefined;
