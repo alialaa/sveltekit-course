@@ -7,7 +7,3 @@ export const load: LayoutServerLoad = ({ locals }) => {
 		user
 	};
 };
-
-export const ssr = true;
-export const csr = true;
-export const trailingSlash = 'never';

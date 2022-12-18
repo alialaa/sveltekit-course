@@ -13,19 +13,19 @@
 	{/if}
 </svelte:head>
 
-{#if data.user}
+<!-- {#if data.user}
 	<p>Logged in as {data.user.name}</p>
-{/if}
+{/if} -->
 
 <nav data-sveltekit-preload-data="hover">
 	<a href="/">Home</a>
 	<a href="/products">Products</a>
-	{#if !data.user}
+	<!-- {#if !data.user}
 		<a href="/login" data-sveltekit-preload-data="off">Login</a>
-	{/if}
+	{/if} -->
 </nav>
 
-{#if data.user}
+<!-- {#if data.user}
 	<button
 		on:click={async () => {
 			const response = await fetch('/api/logout', { method: 'POST' });
@@ -36,6 +36,6 @@
 	>
 		Logout
 	</button>
-{/if}
+{/if} -->
 
 <slot />
