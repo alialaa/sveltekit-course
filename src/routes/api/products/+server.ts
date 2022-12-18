@@ -22,3 +22,5 @@ export const POST: RequestHandler = async ({ request }) => {
 
 	return json({ id: 1313, title: product.title });
 };
+
+export const trailingSlash = 'never';
