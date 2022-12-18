@@ -17,11 +17,11 @@
 	<p>Logged in as {data.user.name}</p>
 {/if}
 
-<nav>
+<nav data-sveltekit-preload-data="hover">
 	<a href="/">Home</a>
 	<a href="/products">Products</a>
 	{#if !data.user}
-		<a href="/login">Login</a>
+		<a href="/login" data-sveltekit-preload-data="off">Login</a>
 	{/if}
 </nav>
 
