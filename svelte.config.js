@@ -11,6 +11,10 @@ const config = {
 		adapter: adapter(),
 		alias: {
 			$components: 'src/lib/components'
+		},
+		prerender: {
+			crawl: true,
+			entries: ['*']
 		}
 	}
 };

@@ -16,3 +16,5 @@ export const load: PageServerLoad = async ({ params }) => {
 		description: product.description
 	};
 };
+
+export const prerender = 'auto';
