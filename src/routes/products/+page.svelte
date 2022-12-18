@@ -19,12 +19,12 @@
 	}}>Re-run load function</button
 >
 {#if products && products.length > 0}
-	<ul>
+	<ul data-sveltekit-preload-code="viewport">
 		{#each products as product}
 			<li>
 				<img src={product.thumbnail} alt={product.title} />
 				<h3>
-					<a href="/product/{product.id}" data-sveltekit-preload-data="hover">{product.title}</a>
+					<a href="/product/{product.id}">{product.title}</a>
 				</h3>
 				<p>{product.description}</p>
 			</li>
