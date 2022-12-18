@@ -2,6 +2,9 @@
 	import type { LayoutData } from './$types';
 	import { page } from '$app/stores';
 	import { invalidateAll } from '$app/navigation';
+	import { browser, building, dev, version } from '$app/environment';
+
+	console.log({ browser, building, dev, version });
 
 	export let data: LayoutData;
 </script>
