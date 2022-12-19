@@ -2,6 +2,7 @@
 	import type { LayoutData } from './$types';
 	import { page } from '$app/stores';
 	import { invalidateAll } from '$app/navigation';
+	import { enhance } from '$app/forms';
 
 	export let data: LayoutData;
 </script>
@@ -26,7 +27,7 @@
 </nav>
 
 {#if data.user}
-	<form method="POST" action="/login?/logout&redirectTo={$page.url.pathname}">
+	<form method="POST" action="/login?/logout&redirectTo={$page.url.pathname}" use:enhance>
 		<button type="submit">Logout</button>
 	</form>
 {/if}
@@ -34,7 +35,7 @@
 <slot />
 
 {#if !data.user && $page.url.pathname !== '/login'}
-	<form method="POST" action="/login?/login&redirectTo={$page.url.pathname}">
+	<form method="POST" action="/login?/login&redirectTo={$page.url.pathname}" use:enhance>
 		<label for="username">Username</label><br />
 		<input id="username" name="username" placeholder="Username" />
 		<br /><br />

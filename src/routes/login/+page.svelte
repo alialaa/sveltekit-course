@@ -1,14 +1,15 @@
 <script lang="ts">
 	import type { ActionData } from './$types';
 	import { page } from '$app/stores';
+	import { enhance } from '$app/forms';
 
 	export let form: ActionData;
 	$: console.log($page.form, $page.status);
 </script>
 
-<form method="POST" action="?/login">
+<form method="POST" action="?/login" use:enhance>
 	<label for="username">Username</label><br />
-	<input id="username" name="username" placeholder="Username" />
+	<input id="username" name="username" placeholder="Username" value={form?.username || ''} />
 	<br />
 	{#if form?.usernameMissing}
 		<p style="color: red; margin-bottom: 0">Username is Required!</p>
