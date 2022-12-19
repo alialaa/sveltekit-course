@@ -6,10 +6,6 @@
 	$: console.log($page.form, $page.status);
 </script>
 
-{#if form?.success}
-	<p style="color: green">You are now logged in!</p>
-{/if}
-
 <form method="POST">
 	<label for="username">Username</label><br />
 	<input id="username" name="username" placeholder="Username" />

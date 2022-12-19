@@ -41,7 +41,7 @@
 <slot />
 
 {#if !data.user && $page.url.pathname !== '/login'}
-	<form method="POST" action="/login">
+	<form method="POST" action="/login?redirectTo={$page.url.pathname}">
 		<label for="username">Username</label><br />
 		<input id="username" name="username" placeholder="Username" />
 		<br /><br />

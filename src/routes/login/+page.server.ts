@@ -1,7 +1,7 @@
-import { fail, type Actions } from '@sveltejs/kit';
+import { fail, redirect, type Actions } from '@sveltejs/kit';
 
 export const actions: Actions = {
-	default: async ({ request, cookies }) => {
+	default: async ({ request, cookies, url }) => {
 		const form = await request.formData();
 		const username = form.get('username');
 		const password = form.get('password');
@@ -17,6 +17,6 @@ export const actions: Actions = {
 			path: '/'
 		});
 
-		return { success: true };
+		throw redirect(303, url.searchParams.get('redirectTo') || '/');
 	}
 };
