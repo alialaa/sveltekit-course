@@ -2,9 +2,31 @@
 	import type { LayoutData } from './$types';
 	import { page } from '$app/stores';
 	import { invalidateAll } from '$app/navigation';
-	import { enhance } from '$app/forms';
+	import { applyAction, enhance, type SubmitFunction } from '$app/forms';
+	import type { ActionData } from './login/$types';
 
 	export let data: LayoutData;
+	let isLoading = false;
+	let error = '';
+	let form: ActionData;
+
+	const handleLoginEnhance: SubmitFunction = () => {
+		isLoading = true;
+		error = '';
+		return ({ result }) => {
+			isLoading = false;
+			if (result.type === 'redirect') {
+				form = null;
+				applyAction(result);
+			}
+			if (result.type === 'error') {
+				error = result.error.message;
+			}
+			if (result.type === 'failure') {
+				form = result.data as ActionData;
+			}
+		};
+	};
 </script>
 
 <svelte:head>
@@ -35,16 +57,30 @@
 <slot />
 
 {#if !data.user && $page.url.pathname !== '/login'}
-	<form method="POST" action="/login?/login&redirectTo={$page.url.pathname}" use:enhance>
+	{#if error}
+		<p style="color: red">{error}</p>
+	{/if}
+	<form
+		method="POST"
+		action="/login?/login&redirectTo={$page.url.pathname}"
+		use:enhance={handleLoginEnhance}
+	>
 		<label for="username">Username</label><br />
-		<input id="username" name="username" placeholder="Username" />
+		<input id="username" name="username" placeholder="Username" value={form?.username || ''} />
+		<br />
+		{#if form?.usernameMissing}
+			<p style="color:red">Username is Required</p>
+		{/if}
 		<br /><br />
 
 		<label for="password">Password</label><br />
 		<input id="password" name="password" placeholder="Password" type="password" />
-
+		<br />
+		{#if form?.passwordMissing}
+			<p style="color:red">Password is Required</p>
+		{/if}
 		<br /><br />
 
-		<button type="submit">Login</button>
+		<button type="submit" disabled={isLoading}>Login</button>
 	</form>
 {/if}
