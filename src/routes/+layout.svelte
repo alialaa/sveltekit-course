@@ -2,9 +2,6 @@
 	import type { LayoutData } from './$types';
 	import { page } from '$app/stores';
 	import { invalidateAll } from '$app/navigation';
-	import { browser, building, dev, version } from '$app/environment';
-
-	console.log({ browser, building, dev, version });
 
 	export let data: LayoutData;
 </script>
@@ -16,19 +13,19 @@
 	{/if}
 </svelte:head>
 
-<!-- {#if data.user}
+{#if data.user}
 	<p>Logged in as {data.user.name}</p>
-{/if} -->
+{/if}
 
 <nav data-sveltekit-preload-data="hover">
 	<a href="/">Home</a>
 	<a href="/products">Products</a>
-	<!-- {#if !data.user}
+	{#if !data.user}
 		<a href="/login" data-sveltekit-preload-data="off">Login</a>
-	{/if} -->
+	{/if}
 </nav>
 
-<!-- {#if data.user}
+{#if data.user}
 	<button
 		on:click={async () => {
 			const response = await fetch('/api/logout', { method: 'POST' });
@@ -39,6 +36,21 @@
 	>
 		Logout
 	</button>
-{/if} -->
+{/if}
 
 <slot />
+
+{#if !data.user && $page.url.pathname !== '/login'}
+	<form method="POST" action="/login">
+		<label for="username">Username</label><br />
+		<input id="username" name="username" placeholder="Username" />
+		<br /><br />
+
+		<label for="password">Password</label><br />
+		<input id="password" name="password" placeholder="Password" type="password" />
+
+		<br /><br />
+
+		<button type="submit">Login</button>
+	</form>
+{/if}
