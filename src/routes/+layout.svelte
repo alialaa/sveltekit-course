@@ -26,22 +26,15 @@
 </nav>
 
 {#if data.user}
-	<button
-		on:click={async () => {
-			const response = await fetch('/api/logout', { method: 'POST' });
-			if (response.ok) {
-				invalidateAll();
-			}
-		}}
-	>
-		Logout
-	</button>
+	<form method="POST" action="/login?/logout&redirectTo={$page.url.pathname}">
+		<button type="submit">Logout</button>
+	</form>
 {/if}
 
 <slot />
 
 {#if !data.user && $page.url.pathname !== '/login'}
-	<form method="POST" action="/login?redirectTo={$page.url.pathname}">
+	<form method="POST" action="/login?/login&redirectTo={$page.url.pathname}">
 		<label for="username">Username</label><br />
 		<input id="username" name="username" placeholder="Username" />
 		<br /><br />

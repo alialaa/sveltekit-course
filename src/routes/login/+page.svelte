@@ -6,7 +6,7 @@
 	$: console.log($page.form, $page.status);
 </script>
 
-<form method="POST">
+<form method="POST" action="?/login">
 	<label for="username">Username</label><br />
 	<input id="username" name="username" placeholder="Username" />
 	<br />
