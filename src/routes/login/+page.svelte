@@ -1,13 +1,36 @@
 <script lang="ts">
 	import type { ActionData } from './$types';
 	import { page } from '$app/stores';
-	import { enhance } from '$app/forms';
+	import { enhance, applyAction } from '$app/forms';
+
+	let isLoading = false;
+	let error = '';
 
 	export let form: ActionData;
 	$: console.log($page.form, $page.status);
 </script>
 
-<form method="POST" action="?/login" use:enhance>
+{#if error}
+	<p style="color: red">{error}</p>
+{/if}
+<form
+	method="POST"
+	action="?/login"
+	use:enhance={({ form, data, action, cancel }) => {
+		isLoading = true;
+
+		return ({ result, update }) => {
+			isLoading = false;
+			if (result.type === 'failure' || result.type === 'redirect') {
+				applyAction(result);
+			}
+			if (result.type === 'error') {
+				error = result.error.message;
+			}
+			// update();
+		};
+	}}
+>
 	<label for="username">Username</label><br />
 	<input id="username" name="username" placeholder="Username" value={form?.username || ''} />
 	<br />
@@ -25,5 +48,5 @@
 
 	<br /><br />
 
-	<button type="submit">Login</button>
+	<button type="submit" disabled={isLoading}>Login</button>
 </form>

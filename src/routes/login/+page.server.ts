@@ -5,6 +5,8 @@ export const actions: Actions = {
 		const form = await request.formData();
 		const username = form.get('username');
 		const password = form.get('password');
+		await new Promise((resolve) => setTimeout(resolve, 1000));
+		// throw new Error('Error');
 
 		if (!username) {
 			return fail(400, { usernameMissing: true });
