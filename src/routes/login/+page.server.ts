@@ -1,9 +1,22 @@
-import type { Actions } from '@sveltejs/kit';
+import { fail, type Actions } from '@sveltejs/kit';
 
 export const actions: Actions = {
-	default: async ({ request }) => {
+	default: async ({ request, cookies }) => {
 		const form = await request.formData();
-		console.log(form.get('username'));
-		console.log(form.get('password'));
+		const username = form.get('username');
+		const password = form.get('password');
+
+		if (!username) {
+			return fail(400, { usernameMissing: true });
+		}
+		if (!password) {
+			return fail(400, { passwordMissing: true });
+		}
+
+		cookies.set('token', 'token_value', {
+			path: '/'
+		});
+
+		return { success: true };
 	}
 };
