@@ -4,6 +4,7 @@
 	export let data: PageData;
 
 	$: product = data.product;
+	$: console.log(data.nested);
 </script>
 
 <!-- <svelte:head>
@@ -16,6 +17,14 @@
 <h1>{product?.title}</h1>
 
 <p>{product?.description}</p>
+
+{#await data.nested.comments}
+	Loading...
+{:then data}
+	{#each data.comments as comment}
+		<p>{comment.body}</p>
+	{/each}
+{/await}
 
 <style>
 	img {
