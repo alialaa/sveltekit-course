@@ -10,7 +10,6 @@
 	<title>{product.title}</title>
 	<meta name="description" content={product.description} />
 </svelte:head> -->
-
 <img src={product?.thumbnail} alt={product?.title} />
 
 <h1>{product?.title}</h1>
