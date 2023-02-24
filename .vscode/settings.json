@@ -3,7 +3,7 @@
     "window.zoomLevel": 3.5,
     "workbench.activityBar.visible": false,
     "workbench.statusBar.visible": false,
-    "editor.hover.enabled": false,
+    // "editor.hover.enabled": false,
     "gitlens.currentLine.enabled": false,
     "terminal.integrated.fontSize": 18,
     "terminal.integrated.fontWeight": "500",
